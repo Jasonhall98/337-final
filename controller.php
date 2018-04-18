@@ -6,6 +6,8 @@ if (isset($_POST['login'])) {
     $_SESSION['permissions'] = 1;
 } elseif (isset($_POST['logout'])) {
     session_unset();
+} elseif (isset($_POST['getClasses'])) {
+    echo json_encode($theDBA->getClasses());
 }
 
 ?>

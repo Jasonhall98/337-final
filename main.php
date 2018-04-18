@@ -21,8 +21,37 @@ if (!isset($_SESSION['permissions'])) {
     echo '<input placeholder="Password" id="pass" required> <br> <br>';
     echo '<input type="submit" value="Login">';    
     echo '</form></div>';
-} else {    
+    echo '<button onclick="register();"> Register </button>';
+} else {   
+    echo '<div class="blue">';
     echo '<button onclick="logout();"> Logout </button>';
+    echo '</div>';
+    
+    echo '<div id="classes"></div>';
+    echo '<script>';
+    echo ' 	var classes = document.getElementById("classes");
+        	
+        	var anObj = new XMLHttpRequest();
+        	anObj.open("POST", "controller.php", true);
+        	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        	anObj.send("getClasses=1");
+        
+        	anObj.onreadystatechange = function () {
+        		if (anObj.readyState == 4 && anObj.status == 200) {
+        			var array = JSON.parse(anObj.responseText);
+                    
+                    var str = "";
+        			
+                    for (var i = 0; i < array.length; i++) {
+                        str += array[i]["course_id"] + " " + array[i]["title"] + "<br>";
+                    }
+                    
+        			classes.innerHTML = str;
+        		  }
+           }';
+        
+    echo '</script>';
+        
     
 }
 ?>
@@ -61,6 +90,11 @@ function login() {
 			}
 		}
 	}
+	
+}
+
+function register() {
+	window.location.href = 'register.php';
 	
 }
 

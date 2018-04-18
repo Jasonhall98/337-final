@@ -1,2 +1,13 @@
 @charset "ISO-8859-1";
 
+.blue {
+	background-color: blue;
+	height: 40px;
+	width: auto;
+}
+
+button {
+	margin: 10px;
+	float: right;
+	
+}

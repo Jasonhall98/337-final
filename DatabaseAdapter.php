@@ -18,7 +18,13 @@ class DatabaseAdaptor {
         }
     }
     
-    
+   
+    public function getClasses() {
+        $stmt = $this->DB->prepare( "SELECT * FROM courses" );
+        $stmt->execute ();
+        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+    }
    
     
 }
