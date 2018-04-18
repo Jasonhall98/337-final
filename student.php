@@ -42,4 +42,17 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 		  }
    };
 
+   function logout() {
+		var anObj = new XMLHttpRequest();
+		anObj.open("POST", "controller.php", true);
+		anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		anObj.send("logout=1");
+
+		anObj.onreadystatechange = function () {
+			if (anObj.readyState == 4 && anObj.status == 200) {
+				window.location.href = window.location.href;
+			}
+		}
+	}
+
 </script>

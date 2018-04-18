@@ -21,7 +21,7 @@ if (!isset($_SESSION['permissions'])) {
     echo '<input placeholder="Password" id="pass" required> <br> <br>';
     echo '<input type="submit" value="Login">';    
     echo '</form></div>';
-    echo '<button onclick="	window.location.href = "register.php";"> Register </button>';
+    echo '<button onclick="window.location.href=\'register.php\';"> Register </button>';
 } else {   
     echo '<script> window.location.href = "student.php" </script>';
     
@@ -34,18 +34,7 @@ if (!isset($_SESSION['permissions'])) {
 
 <script>
 
-function logout() {
-	var anObj = new XMLHttpRequest();
-	anObj.open("POST", "controller.php", true);
-	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	anObj.send("logout=1");
 
-	anObj.onreadystatechange = function () {
-		if (anObj.readyState == 4 && anObj.status == 200) {
-			window.location.href = window.location.href;
-		}
-	}
-}
 
 function login() {
 	var user = document.getElementById('user').value;
@@ -67,7 +56,6 @@ function login() {
 	}
 	
 }
-
 
 
 </script>

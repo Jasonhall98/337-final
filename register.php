@@ -45,6 +45,15 @@ function register() {
 
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
+			var success = anObj.responseText;
+
+			if (success == 0) {
+				// The action failed because another user with that username already exists
+				
+				
+			} else {
+
+			}
 			
 		}
 	}

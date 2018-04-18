@@ -25,6 +25,32 @@ class DatabaseAdaptor {
         return $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
     }
+    
+    public function register($first, $last, $email, $user, $pass) {
+        $hash = password_hash($pass, PASSWORD_DEFAULT);
+        
+        $stmt = $this->DB->prepare("SELECT * from users where username = :user");
+        $stmt->bindParam(':user', $user);
+        $stmt->execute ();
+        $db_user = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        if ($db_user == null ){
+        
+            $stmt = $this->DB->prepare( "INSERT INTO users (first_name, last_name, email, username, hash) values 
+                                        (:first, :last, :email, :user, '" . $hash . "')"  );
+            $stmt->bindParam(':first', $first);
+            $stmt->bindParam(':last', $last);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':user', $user);
+            
+            
+            $stmt->execute ();
+            $stmt->fetchAll ( PDO::FETCH_ASSOC );
+            
+            return 1;
+        }
+        return 0;
+    }
    
     
 }
