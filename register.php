@@ -24,7 +24,7 @@ UserName <br>
 Password <br>
 <input id="pass" required> <br>
 
-<select>
+<select id=permissions>
 	<option value="1">Student</option>
 	<option value="2">Teacher</option>
 	<option value="3">Admin</option>
@@ -43,8 +43,11 @@ function register() {
 	var email = document.getElementById("email").value;
 	var user = document.getElementById("user").value;
 	var pass = document.getElementById("pass").value;
-	var permissions = document.getElementById("permissions").value;
+
+	var e = document.getElementById("permissions");
+	var permissions = e.options[e.selectedIndex].value;
 	
+	alert(permissions);
 	
 	var anObj = new XMLHttpRequest();
 	anObj.open("POST", "controller.php", true);

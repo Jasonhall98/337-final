@@ -47,7 +47,6 @@ class DatabaseAdaptor {
             
             
             $stmt->execute ();
-            $stmt->fetchAll ( PDO::FETCH_ASSOC );
             
             return 1;
         }
@@ -60,9 +59,13 @@ class DatabaseAdaptor {
         $stmt->bindParam(':user', $user);
         $stmt->execute ();
         $db_user = $stmt->fetchAll ( PDO::FETCH_ASSOC );
-        if (password_verify($pass, $db_user[0]['hash']))
+        if (password_verify($pass, $db_user[0]['hash'])) {
+            session_start();
+            $_SESSION['permissions'] = $db_user['permissions'];
+            $_SESSION['first_name'] = $db_user['first_name'];
+            $_SESSION['last_name'] = $db_user['last_name'];
             return 1;
-        else
+        } else
             return 0;
     }
     
