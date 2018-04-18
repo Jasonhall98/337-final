@@ -50,7 +50,8 @@ function login() {
 			if (isset($_SESSION['permissions'])) {
 				window.location.href = window.location.href;
 			} else {
-				
+				var change = document.getElementById('write');
+				alert("invalid Username or Password");
 			}
 		}
 	}

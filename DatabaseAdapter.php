@@ -26,7 +26,7 @@ class DatabaseAdaptor {
         
     }
     
-    public function register($first, $last, $email, $user, $pass) {
+    public function register($first, $last, $email, $user, $pass, $permissions) {
         $hash = password_hash($pass, PASSWORD_DEFAULT);
         
         $stmt = $this->DB->prepare("SELECT * from users where username = :user");
@@ -36,12 +36,14 @@ class DatabaseAdaptor {
         
         if ($db_user == null ){
         
-            $stmt = $this->DB->prepare( "INSERT INTO users (first_name, last_name, email, username, hash) values 
-                                        (:first, :last, :email, :user, '" . $hash . "')"  );
+            $stmt = $this->DB->prepare( "INSERT INTO users (first_name, last_name, email, username, hash, permissions) values 
+                                        (:first, :last, :email, :user, :hash, :permissions)"  );
             $stmt->bindParam(':first', $first);
             $stmt->bindParam(':last', $last);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':user', $user);
+            $stmt->bindParam(':hash', $hash);
+            $stmt->bindParam(':permissions', $permissions);
             
             
             $stmt->execute ();
@@ -52,6 +54,18 @@ class DatabaseAdaptor {
         return 0;
     }
    
+    
+    public function login($user, $pass) {
+        $stmt = $this->DB->prepare("SELECT * from users where username = :user");
+        $stmt->bindParam(':user', $user);
+        $stmt->execute ();
+        $db_user = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        if (password_verify($pass, $db_user[0]['hash']))
+            return 1;
+        else
+            return 0;
+    }
+    
     
 }
 
