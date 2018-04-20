@@ -46,13 +46,11 @@ function register() {
 
 	var e = document.getElementById("permissions");
 	var permissions = e.options[e.selectedIndex].value;
-	
-	alert(permissions);
-	
+		
 	var anObj = new XMLHttpRequest();
 	anObj.open("POST", "controller.php", true);
 	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	anObj.send("register=1&first=" + first + "&last=" + last + "&email=" + email + "&user=" + user + "&pass=" + pass + "$permissions=" + permissions);
+	anObj.send("register=1&first=" + first + "&last=" + last + "&email=" + email + "&user=" + user + "&pass=" + pass + "&permissions=" + permissions);
 
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
