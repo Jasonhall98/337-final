@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 class DatabaseAdaptor {
     // The instance variable used in every one of the functions in class DatbaseAdaptor
@@ -48,6 +49,10 @@ class DatabaseAdaptor {
             
             $stmt->execute ();
             
+            $_SESSION['permissions'] = $permissions;
+            $_SESSION['first_name'] = $first;
+            $_SESSION['last_name'] = $last;
+            
             return 1;
         }
         return 0;
@@ -61,7 +66,6 @@ class DatabaseAdaptor {
         $db_user = $stmt->fetchAll ( PDO::FETCH_ASSOC );
         if (password_verify($pass, $db_user[0]['hash'])) {
 
-            session_start();
             $_SESSION['permissions'] = $db_user[0]['permissions'];
             $_SESSION['first_name'] = $db_user[0]['first_name'];
             $_SESSION['last_name'] = $db_user[0]['last_name'];
@@ -74,10 +78,10 @@ class DatabaseAdaptor {
 }
 
 $theDBA = new DatabaseAdaptor ();
-$arr = $theDBA->login('User', 'Pass');
+//$arr = $theDBA->login('User', 'Pass');
 
 //$arr = $theDBA->register('Jason', 'Hall', 'fondvm', 'User', 'Pass', 1);
-print_r($arr);
+//print_r($arr);
 
 
 ?>

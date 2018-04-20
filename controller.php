@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'DatabaseAdapter.php';
 
 if (isset($_POST['login'])) {

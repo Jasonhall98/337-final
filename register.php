@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,7 @@
 </head>
 <body>
 
-<form onsubmit="register();">
+<form onsubmit="register();return false;">
 
 First Name <br>
 <input id="first" required> <br>
@@ -35,7 +37,10 @@ Password <br>
 
 </form>
 
+<div id="tochange"></div>
+
 <script>
+
 
 function register() {
 	var first = document.getElementById("first").value;
@@ -52,15 +57,18 @@ function register() {
 	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	anObj.send("register=1&first=" + first + "&last=" + last + "&email=" + email + "&user=" + user + "&pass=" + pass + "&permissions=" + permissions);
 
+	alert('pause');
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
 			var success = anObj.responseText;
 
-			if (success == 0) {
+			if (success == '0') {
 				// The action failed because another user with that username already exists
-				
+				document.getElementById('tochange').innerHTML = "Username already taken";
 				
 			} else {
+				window.location.href = 'student.php';
+				
 
 			}
 			

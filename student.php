@@ -15,6 +15,8 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 </head>
 <body>
 
+<?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>
+
 <div class="blue">
 <button onclick="logout();"> Logout </button>
 </div>
