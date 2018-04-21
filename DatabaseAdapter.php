@@ -74,12 +74,41 @@ class DatabaseAdaptor {
             return 0;
     }
     
+    public function createClass($id, $title, $description, $teacherID) {
+        $stmt = $this->DB->prepare("SELECT * from courses where course_id = :id OR title = :title");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':title', $title);
+        $stmt->execute ();
+        $db_user = $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+        if ($db_user == null ){
+            $stmt = $this->DB->prepare( "INSERT INTO courses (course_id, title, description, teacher_id) values
+                                        (:id, :title, :description, :teacherID)"  );
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':teacherID', $teacherID);
+        
+            $stmt->execute ();
+            
+            return 1;
+        }
+        return 0;
+        
+    }
+    
+    public function getTeachers() {
+        $stmt = $this->DB->prepare("SELECT first_name, last_name, id from users where permissions = 2");
+        $stmt->execute();
+        return $stmt->fetchAll (PDO::FETCH_ASSOC );
+        
+    }
+    
     
 }
 
 $theDBA = new DatabaseAdaptor ();
 //$arr = $theDBA->login('User', 'Pass');
-
 //$arr = $theDBA->register('Jason', 'Hall', 'fondvm', 'User', 'Pass', 1);
 //print_r($arr);
 

@@ -22,14 +22,16 @@ if (!isset($_SESSION['permissions'])) {
     echo '<input type="submit" value="Login">';    
     echo '</form></div>';
     echo '<button onclick="window.location.href=\'register.php\';"> Register </button>';
-} else {   
-    echo '<script> window.location.href = "student.php" </script>';
+} else if ($_SESSION['permissions'] == 1) {
+    echo "<script> window.location.href = 'student.php' </script>";
+} else if ($_SESSION['permissions'] == 2) {
+    echo "<script> window.location.href = 'teacher.php' </script>";
+} else if ($_SESSION['permissions'] == 3) {
+    echo "<script> window.location.href = 'admin.php' </script>";
+};
     
-    
-        
-    
-}
 ?>
+
 <div id="write"></div>
 
 <script>
