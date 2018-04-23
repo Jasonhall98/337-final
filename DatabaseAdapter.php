@@ -20,8 +20,9 @@ class DatabaseAdaptor {
     }
     
    
-    public function getClasses() {
-        $stmt = $this->DB->prepare( "SELECT * FROM courses" );
+    public function getClasses($id) {
+        $stmt = $this->DB->prepare( "SELECT * FROM grades join courses on grades.course_id = courses.course_id where student_id = :id" );
+        $stmt->bindParam(':id', $id);
         $stmt->execute ();
         return $stmt->fetchAll ( PDO::FETCH_ASSOC );
         
@@ -69,6 +70,7 @@ class DatabaseAdaptor {
             $_SESSION['permissions'] = $db_user[0]['permissions'];
             $_SESSION['first_name'] = $db_user[0]['first_name'];
             $_SESSION['last_name'] = $db_user[0]['last_name'];
+            $_SESSION['id'] = $db_user[0]['id'];
             return 1;
         } else
             return 0;
@@ -102,6 +104,13 @@ class DatabaseAdaptor {
         $stmt->execute();
         return $stmt->fetchAll (PDO::FETCH_ASSOC );
         
+    }
+    
+    public function getTeacherClasses($id) {
+        $stmt = $this->DB->prepare("SELECT * from courses where teacher_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchAll (PDO::FETCH_ASSOC );
     }
     
     

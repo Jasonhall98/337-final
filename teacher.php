@@ -21,6 +21,8 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 <button onclick="logout();"> Logout </button>
 </div>
 
+<div id='classes'></div>
+
 
 <script>
 
@@ -37,6 +39,26 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 			}
 		}
 	}
+
+var anObj = new XMLHttpRequest();
+anObj.open("POST", "controller.php", true);
+anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+anObj.send("teacherClasses=1&id=" + <?php echo $_SESSION['id']; ?> );
+
+anObj.onreadystatechange = function () {
+	if (anObj.readyState == 4 && anObj.status == 200) {
+		var classes = document.getElementById('classes');
+		var array = JSON.parse(anObj.responseText);
+
+        var str = "";
+
+        for (var i = 0; i < array.length; i++) {
+            str += array[i]["course_id"] + " " + array[i]["title"] + "<br>";
+        }
+
+		classes.innerHTML = str;
+	}
+}
 
 </script>
 </body>

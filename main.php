@@ -16,7 +16,7 @@
 <?php
 if (!isset($_SESSION['permissions'])) {
     echo '<div align="center"> <h3>Login</h3> <br>'; 
-    echo '<form onsubmit="login();">';
+    echo '<form onsubmit="login(); return false;">';
     echo '<input placeholder="Username" id="user" required> <br> <br>';
     echo '<input placeholder="Password" id="pass" required> <br> <br>';
     echo '<input type="submit" value="Login">';    
@@ -49,7 +49,7 @@ function login() {
 
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
-			if (isset($_SESSION['permissions'])) {
+			if (anObj.responseText == 1) {
 				window.location.href = window.location.href;
 			} else {
 				var change = document.getElementById('write');
