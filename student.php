@@ -19,6 +19,7 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 
 <div class="blue">
 <button onclick="logout();"> Logout </button>
+<button onclick="window.location.href= 'registerClasses.php';">Register For Classes</button>
 </div>
 
 <div id="classes"></div>
@@ -28,7 +29,7 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 	var anObj = new XMLHttpRequest();
 	anObj.open("POST", "controller.php", true);
 	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	anObj.send("classes=1&id=" + <?php echo $_SESSION['id'] ?> );
+	anObj.send("studentClasses=1&id=" + <?php echo $_SESSION['id'] ?> );
 
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {

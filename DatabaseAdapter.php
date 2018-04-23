@@ -18,15 +18,7 @@ class DatabaseAdaptor {
             exit ();
         }
     }
-    
-   
-    public function getClasses($id) {
-        $stmt = $this->DB->prepare( "SELECT * FROM grades join courses on grades.course_id = courses.course_id where student_id = :id" );
-        $stmt->bindParam(':id', $id);
-        $stmt->execute ();
-        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
-        
-    }
+
     
     public function register($first, $last, $email, $user, $pass, $permissions) {
         $hash = password_hash($pass, PASSWORD_DEFAULT);
@@ -113,6 +105,21 @@ class DatabaseAdaptor {
         return $stmt->fetchAll (PDO::FETCH_ASSOC );
     }
     
+    
+    public function getStudentClasses($id) {
+        $stmt = $this->DB->prepare( "SELECT * FROM grades join courses on grades.course_id = courses.course_id where student_id = :id" );
+        $stmt->bindParam(':id', $id);
+        $stmt->execute ();
+        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+    }
+    
+    public function getAllClasses() {
+        $stmt = $this->DB->prepare("SELECT * from courses");
+        $stmt->execute();
+        return $stmt->fetchAll (PDO::FETCH_ASSOC );
+        
+    }
     
 }
 
