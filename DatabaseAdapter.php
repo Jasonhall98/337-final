@@ -42,9 +42,7 @@ class DatabaseAdaptor {
             
             $stmt->execute ();
             
-            $_SESSION['permissions'] = $permissions;
-            $_SESSION['first_name'] = $first;
-            $_SESSION['last_name'] = $last;
+            $theDBA->login($user, $pass);
             
             return 1;
         }
@@ -126,6 +124,7 @@ class DatabaseAdaptor {
 $theDBA = new DatabaseAdaptor ();
 //$arr = $theDBA->login('User', 'Pass');
 //$arr = $theDBA->register('Jason', 'Hall', 'fondvm', 'User', 'Pass', 1);
+//$arr = $theDBA->getTeacherClasses(0);
 //print_r($arr);
 
 
