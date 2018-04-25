@@ -53,7 +53,6 @@ function updateGrade(student_id, value) {
 
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
-			alert('done');
 		}
 	}
 	

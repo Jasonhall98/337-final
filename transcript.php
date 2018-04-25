@@ -11,22 +11,17 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="style.css">
-<title>Student Main</title>
+
+<title>Transcript</title>
 </head>
 <body>
 
-<?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>
+<h2>Transcript</h2>
 
-<div class="blue">
-<button onclick="logout();"> Logout </button>
-</div>
+<div id='classes'></div>
 
-<button onclick="window.location.href= 'registerClasses.php';">Register For Classes</button>
-<button onclick="window.location.href= 'transcript.php';">Transcript</button>
-
-
-<div id="classes"></div>
 <script>
+
  	var classes = document.getElementById("classes");
     
 	var anObj = new XMLHttpRequest();
@@ -38,28 +33,16 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 		if (anObj.readyState == 4 && anObj.status == 200) {
 			var array = JSON.parse(anObj.responseText);
 
-            var str = "";
+            var str = "<div class='transcript' align='left'>";
 
             for (var i = 0; i < array.length; i++) {
-                str += array[i]["course_id"] + " " + array[i]["title"] + "<br>";
+                str += "<div class='transcript_id'> " + array[i]["course_id"] + " </div><div class='transcript_title'> " + 
+                		array[i]["title"] + " </div><div class='transcript_grade'> " + array[i]["grade"] + " </div><br>";
             }
 
-			classes.innerHTML = str;
+			classes.innerHTML = str + "</div>";
 		  }
    };
-
-   function logout() {
-		var anObj = new XMLHttpRequest();
-		anObj.open("POST", "controller.php", true);
-		anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		anObj.send("logout=1");
-
-		anObj.onreadystatechange = function () {
-			if (anObj.readyState == 4 && anObj.status == 200) {
-				window.location.href = window.location.href;
-			}
-		}
-	}
 
 </script>
 </body>

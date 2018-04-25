@@ -11,3 +11,32 @@ button {
 	float: right;
 	
 }
+
+.column {
+	width: 10%;
+	padding: 1%;
+	float: left;
+	background-color: blue;
+}
+
+.row {
+	height: 5%;
+	
+}
+
+.transcript {
+	display: grid;
+    grid-template-columns: 80px 200px auto;
+}
+
+.transcript_id {
+	grid-column: 1;
+}
+
+.transcript_title {
+	grid-column: 2;
+}
+
+.transcript_grade {
+	grid-column: 3;
+}
