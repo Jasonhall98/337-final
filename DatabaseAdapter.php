@@ -119,12 +119,29 @@ class DatabaseAdaptor {
         
     }
     
+    public function getGradesTeacher($course_id) {
+        $stmt = $this->DB->prepare("SELECT * from grades join users on grades.student_id = users.id where course_id = :course_id");
+        $stmt->bindParam(':course_id', $course_id);
+        $stmt->execute();
+        return $stmt->fetchAll (PDO::FETCH_ASSOC );
+        
+    }
+    
+    public function updateGrade($course_id, $student_id, $value) {
+        $stmt = $this->DB->prepare("UPDATE grades SET grade = :value where course_id = :course_id and student_id = :student_id");
+        $stmt->bindParam(":value", $value);
+        $stmt->bindParam(":course_id", $course_id);
+        $stmt->bindParam(":student_id", $student_id);
+        $stmt->execute();
+    
+    }
+    
 }
 
 $theDBA = new DatabaseAdaptor ();
 //$arr = $theDBA->login('User', 'Pass');
 //$arr = $theDBA->register('Jason', 'Hall', 'fondvm', 'User', 'Pass', 1);
-//$arr = $theDBA->getTeacherClasses(0);
+//$arr = $theDBA->updateGrades(666, 7,"A");
 //print_r($arr);
 
 

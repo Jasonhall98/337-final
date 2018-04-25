@@ -15,6 +15,10 @@ if (isset($_POST['login'])) {
     echo json_encode($theDBA->getTeacherClasses($_POST['id']));
 } elseif (isset($_POST['classes'])) {
     echo json_encode($theDBA->getAllClasses());
+} elseif (isset($_POST['getGradesTeacher'])) {
+    echo json_encode($theDBA->getGradesTeacher($_POST['course_id']));
+} elseif (isset($_POST['updateGrade'])) {
+    echo $theDBA->updateGrade($_POST['course_id'], $_POST['student_id'], $_POST['value']);
 }
 
 ?>
