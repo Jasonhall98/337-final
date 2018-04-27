@@ -119,9 +119,10 @@ class DatabaseAdaptor {
         
     }
     
-    public function getGradesTeacher($course_id) {
-        $stmt = $this->DB->prepare("SELECT * from grades join users on grades.student_id = users.id where course_id = :course_id");
+    public function getAssignmentGrades($course_id, $assignment) {
+        $stmt = $this->DB->prepare("SELECT * from curGrades join users on curGrades.student_id = users.id where course_id = :course_id and assignment = :assignment");
         $stmt->bindParam(':course_id', $course_id);
+        $stmt->bindParam(':assignment', $assignment);
         $stmt->execute();
         return $stmt->fetchAll (PDO::FETCH_ASSOC );
         
@@ -136,12 +137,43 @@ class DatabaseAdaptor {
     
     }
     
+    public function createAssignment($course_id, $assignment, $points) {
+        
+        $stmt = $this->DB->prepare("insert into assignments (class_id, assignment) values (:course_id, :assignment)");
+        $stmt->bindParam(':course_id', $course_id);
+        $stmt->bindParam(':assignment', $assignment);
+        $stmt->execute();
+        
+        $stmt = $this->DB->prepare("select student_id from curClasses where class_id = :class_id");
+        $stmt->bindParam(":class_id", $course_id);
+        $arr = $stmt->execute();
+        
+        
+        for ($i = 0; $i < count($arr); $i++) {
+            $stmt = $this->DB->prepare("insert into curGrades (class_id, student_id, assignment, maxPoints) values (:course_id, :student_id, :assignment, :points)");
+            $stmt->bindParam(":course_id", $course_id);
+            $stmt->bindParam(":student_id", $arr[i]);
+            $stmt->bindParam("assignment", $assignment);
+            $stmt->bindParam("points", $points);
+            $stmt->execute();
+        }
+        
+    }
+    
+    public function getAssignments ($course_id) {
+        $stmt = $this->DB->prepare("SELECT * from assignments where class_id = :course_id");
+        $stmt->bindParam(':course_id', $course_id);
+        $stmt->execute();
+        return $stmt->fetchAll (PDO::FETCH_ASSOC );
+        
+    }
+    
 }
 
 $theDBA = new DatabaseAdaptor ();
 //$arr = $theDBA->login('User', 'Pass');
 //$arr = $theDBA->register('Jason', 'Hall', 'fondvm', 'User', 'Pass', 1);
-//$arr = $theDBA->updateGrades(666, 7,"A");
+//$arr = $theDBA->getAssignments(666);
 //print_r($arr);
 
 

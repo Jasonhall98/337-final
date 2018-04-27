@@ -22,7 +22,8 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 <div id='assignmentCreate'></div>
 
 
-<div id='Grades'></div>
+<br><br>
+<div id='Assignments'></div>
 
 
 <script>
@@ -45,35 +46,23 @@ function createAssignment() {
 	var anObj = new XMLHttpRequest();
 	anObj.open("POST", "controller.php", true);
 	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	anObj.send("createAssignment=1&course_id=" + <?php echo $_GET['class']; ?> + "&assignment= );
+	anObj.send("createAssignment=1&course_id=" + <?php echo $_GET['class']; ?> + "&assignment=" + assignment + "&points=" + points );
 
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
-			var array = JSON.parse(anObj.responseText);
-
-	        var str = "<div>";
-
-	        for (var i = 0; i < array.length; i++) {
-	            str += "<div>" + array[i]["first_name"] + " " + array[i]["last_name"] + " <input onchange='updateGrade(" + array[i]['student_id'] +
-	            																 ", this.value)' value='" + array[i]["grade"] + "'></div><br>";
-	        }
-
-	        str += '</div>';
-
-			grades.innerHTML = str;
+			window.location.href = window.location.href;
 		}
 	}
 	
 }
 
 
-/*
-var grades = document.getElementById('Grades');
+var assignments = document.getElementById('Assignments');
 
 var anObj = new XMLHttpRequest();
 anObj.open("POST", "controller.php", true);
 anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-anObj.send("getGradesTeacher=1&course_id=" + <?php echo $_GET['class']; ?> );
+anObj.send("getAssignments=1&course_id=" + <?php echo $_GET['class']; ?> );
 
 anObj.onreadystatechange = function () {
 	if (anObj.readyState == 4 && anObj.status == 200) {
@@ -82,15 +71,15 @@ anObj.onreadystatechange = function () {
         var str = "<div>";
 
         for (var i = 0; i < array.length; i++) {
-            str += "<div>" + array[i]["first_name"] + " " + array[i]["last_name"] + " <input onchange='updateGrade(" + array[i]['student_id'] +
-            																 ", this.value)' value='" + array[i]["grade"] + "'></div><br>";
+            str += "<div onclick='window.location.href=\"teacherAssignmentGrades.php?course_id=" + array[i]['class_id'] +
+            					 "&assignment=" + array[i]['assignment'] + "\"' >" + array[i]['assignment'] + "</div><br>";
         }
 
         str += '</div>';
 
-		grades.innerHTML = str;
+		assignments.innerHTML = str;
 	}
-}*/
+}
 
 
 function updateGrade(student_id, value) {
