@@ -167,7 +167,7 @@ class DatabaseAdaptor {
         return $stmt->fetchAll (PDO::FETCH_ASSOC );
         
     }
-    
+  
     public function getStudentClassGrades($id, $class) {
         $stmt = $this->DB->prepare("SELECT * from curGrades where class_id = :class and student_id = :id");
         $stmt->bindParam(':id', $id);
@@ -177,6 +177,13 @@ class DatabaseAdaptor {
         
     }
     
+    public function registerClass($course_id, $student_id, $teacher_id) {
+    	$stmt = $this->DB->prepare("INSERT INTO currClasses(teacher_id, class_id, student_id) values (:teacher, :class, :student)");
+    	$stmt->bindParam(':teacher', $teacher_id);
+    	$stmt->bindParam(':student', $student_id);
+    	$stmt->bindParam(':class', $course_id);
+    	$stmt->execute();
+    }
 }
 
 $theDBA = new DatabaseAdaptor ();
