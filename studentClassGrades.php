@@ -37,7 +37,7 @@ anObj.onreadystatechange = function () {
 		
         for (var i = 0; i < array.length; i++) {
             var points = array[i]["points"];
-            if (points = 'null') points = 0;
+            if (points === 'null') points = 0;
             str += "<div>" + array[i]["assignment"] + " " + points + "/" + array[i]['maxPoints'] + "</div><br>";
 
 			totalPoints += parseInt(points);

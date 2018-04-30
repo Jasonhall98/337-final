@@ -18,7 +18,7 @@ if (isset($_POST['login'])) {
 } elseif (isset($_POST['getAssignmentGrades'])) {
     echo json_encode($theDBA->getAssignmentGrades($_POST['course_id'], $_POST['assignment']));
 } elseif (isset($_POST['updateGrade'])) {
-    echo $theDBA->updateGrade($_POST['course_id'], $_POST['student_id'], $_POST['value']);
+    echo $theDBA->updateGrade($_POST['course_id'], $_POST['student_id'], $_POST['value'], $_POST['assignment']);
 } elseif (isset($_POST['createAssignment'])) {
     echo $theDBA->createAssignment($_POST['course_id'], $_POST['assignment'], $_POST['points']);
 } elseif (isset($_POST['getAssignments'])) {

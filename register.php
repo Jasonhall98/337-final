@@ -57,7 +57,7 @@ function register() {
 	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	anObj.send("register=1&first=" + first + "&last=" + last + "&email=" + email + "&user=" + user + "&pass=" + pass + "&permissions=" + permissions);
 
-	alert('pause');
+	//alert('pause');
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
 			var success = anObj.responseText;

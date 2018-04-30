@@ -128,11 +128,12 @@ class DatabaseAdaptor {
         
     }
     
-    public function updateGrade($course_id, $student_id, $value) {
-        $stmt = $this->DB->prepare("UPDATE grades SET grade = :value where course_id = :course_id and student_id = :student_id");
+    public function updateGrade($course_id, $student_id, $value, $assignment) {
+        $stmt = $this->DB->prepare("UPDATE curGrades SET points = :value where class_id = :course_id and student_id = :student_id and assignment = :assignment");
         $stmt->bindParam(":value", $value);
         $stmt->bindParam(":course_id", $course_id);
         $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":assignment", $assignment);
         $stmt->execute();
     
     }
