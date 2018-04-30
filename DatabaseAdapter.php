@@ -177,6 +177,12 @@ class DatabaseAdaptor {
         
     }
     
+    
+    public function getClassInfo($course_id, $teacher_id) {
+    	
+    }
+    
+    
     public function registerClass($course_id, $student_id, $teacher_id) {
     	$stmt = $this->DB->prepare("INSERT INTO currClasses(teacher_id, class_id, student_id) values (:teacher, :class, :student)");
     	$stmt->bindParam(':teacher', $teacher_id);
