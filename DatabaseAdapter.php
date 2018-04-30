@@ -168,6 +168,13 @@ class DatabaseAdaptor {
         
     }
     
+    public function registerClass($course_id, $student_id, $teacher_id) {
+    	$stmt = $this->DB->prepare("INSERT INTO currClasses(teacher_id, class_id, student_id) values (:teacher, :class, :student)");
+    	$stmt->bindParam(':teacher', $teacher_id);
+    	$stmt->bindParam(':student', $student_id);
+    	$stmt->bindParam(':class', $course_id);
+    	$stmt->execute();
+    }
 }
 
 $theDBA = new DatabaseAdaptor ();
