@@ -178,17 +178,29 @@ class DatabaseAdaptor {
     }
     
     
-    public function getClassInfo($course_id, $teacher_id) {
-    	
+    public function getClassInfo($course_id) {
+    	$stmt = $this->DB->prepare("select * from courses join users on courses.teacher_id = users.id where course_id = :course");
+    	$stmt->bindParam(":course", $course_id);
+
+    	$stmt->execute();
+    	return $stmt->fetchAll (PDO::FETCH_ASSOC );
     }
     
     
+    
     public function registerClass($course_id, $student_id, $teacher_id) {
-    	$stmt = $this->DB->prepare("INSERT INTO currClasses(teacher_id, class_id, student_id) values (:teacher, :class, :student)");
+    	$stmt = $this->DB->prepare("SELECT * from curclasses where student_id = :student and class_id = :class and teacher_id = :teacher");
+    	$stmt->bindParam(':student', $student_id);
+    	$stmt->bindParam(':class', $class_id);
+    	$stmt->bindparam(':teacher', $teacher_id);
+    	$stmt->execute ();
+    	$thing = $stmt.fet
+    	$stmt = $this->DB->prepare("INSERT INTO curclasses(teacher_id, class_id, student_id) values (:teacher, :class, :student)");
     	$stmt->bindParam(':teacher', $teacher_id);
     	$stmt->bindParam(':student', $student_id);
     	$stmt->bindParam(':class', $course_id);
     	$stmt->execute();
+    	
     }
 }
 
@@ -197,6 +209,7 @@ $theDBA = new DatabaseAdaptor ();
 //$arr = $theDBA->register('Jason', 'Hall', 'fondvm', 'User', 'Pass', 1);
 //$arr = $theDBA->getAssignmentGrades(666, 'Assignment1');
 //$arr = $theDBA->createAssignment(666, 'Assignment1', 10);
+//$arr = $theDBA->getClassInfo(666);
 //print_r($arr);
 
 

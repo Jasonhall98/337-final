@@ -23,13 +23,16 @@ if (isset($_POST['login'])) {
     echo $theDBA->createAssignment($_POST['course_id'], $_POST['assignment'], $_POST['points']);
 } elseif (isset($_POST['getAssignments'])) {
     echo json_encode($theDBA->getAssignments($_POST['course_id']));
-<<<<<<< Upstream, based on branch 'dev' of git@github.com:Jasonhall98/337-final.git
+
 } elseif (isset($_POST['studentClassGrades'])) {
     echo json_encode($theDBA->getStudentClassGrades($_POST['id'], $_POST['class']));
-=======
+
 } elseif (isset($_POST['studentRegisterClasses'])) {
-	echo json_encode($theDBA->registerClass($_POST['course_id'], $_POST['student_id'], $_POST['teacher_id']));
->>>>>>> 562d68e staging classPage stuff
+	
+	echo $theDBA->registerClass($_POST['course_id'], $_POST['student_id'], $_POST['teacher_id']);
+
+} elseif (isset($_POST['getClassInfo'])) {
+	echo json_encode($theDBA->getClassInfo($_POST['course_id']));
 }
 
 ?>
