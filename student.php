@@ -23,6 +23,7 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 
 <button onclick="window.location.href= 'registerClasses.php';">Register For Classes</button>
 <button onclick="window.location.href= 'transcript.php';">Transcript</button>
+<button onclick="window.location.href= 'studentGrades.php';">Grades</button>
 
 
 <div id="classes"></div>

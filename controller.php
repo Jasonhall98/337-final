@@ -23,6 +23,8 @@ if (isset($_POST['login'])) {
     echo $theDBA->createAssignment($_POST['course_id'], $_POST['assignment'], $_POST['points']);
 } elseif (isset($_POST['getAssignments'])) {
     echo json_encode($theDBA->getAssignments($_POST['course_id']));
+} elseif (isset($_POST['studentClassGrades'])) {
+    echo json_encode($theDBA->getStudentClassGrades($_POST['id'], $_POST['class']));
 }
 
 ?>

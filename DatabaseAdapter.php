@@ -168,6 +168,15 @@ class DatabaseAdaptor {
         
     }
     
+    public function getStudentClassGrades($id, $class) {
+        $stmt = $this->DB->prepare("SELECT * from curGrades where class_id = :class and student_id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':class', $class);
+        $stmt->execute();
+        return $stmt->fetchAll (PDO::FETCH_ASSOC );
+        
+    }
+    
 }
 
 $theDBA = new DatabaseAdaptor ();

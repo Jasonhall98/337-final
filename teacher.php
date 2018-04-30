@@ -21,9 +21,10 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 <button onclick="logout();"> Logout </button>
 </div>
 
+<button onclick='window.location.href="teacherGrades.php"'>Grades</button>
+
 <div id='classes'></div>
 
-<button onclick='window.location.href="teacherGrades.php"'>Grades</button>
 
 <script>
 
