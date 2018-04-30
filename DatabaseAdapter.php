@@ -120,7 +120,7 @@ class DatabaseAdaptor {
     }
     
     public function getAssignmentGrades($course_id, $assignment) {
-        $stmt = $this->DB->prepare("SELECT * from curGrades join users on curGrades.student_id = users.id where course_id = :course_id and assignment = :assignment");
+        $stmt = $this->DB->prepare("SELECT * from curGrades join users on curGrades.student_id = users.id where class_id = :course_id and assignment = :assignment");
         $stmt->bindParam(':course_id', $course_id);
         $stmt->bindParam(':assignment', $assignment);
         $stmt->execute();
@@ -144,15 +144,15 @@ class DatabaseAdaptor {
         $stmt->bindParam(':assignment', $assignment);
         $stmt->execute();
         
-        $stmt = $this->DB->prepare("select student_id from curClasses where class_id = :class_id");
+        $stmt = $this->DB->prepare("select * from curClasses where class_id = :class_id");
         $stmt->bindParam(":class_id", $course_id);
-        $arr = $stmt->execute();
-        
+        $stmt->execute();
+        $arr = $stmt->fetchAll (PDO::FETCH_ASSOC);
         
         for ($i = 0; $i < count($arr); $i++) {
             $stmt = $this->DB->prepare("insert into curGrades (class_id, student_id, assignment, maxPoints) values (:course_id, :student_id, :assignment, :points)");
             $stmt->bindParam(":course_id", $course_id);
-            $stmt->bindParam(":student_id", $arr[i]);
+            $stmt->bindParam(":student_id", $arr[$i]['student_id']);
             $stmt->bindParam("assignment", $assignment);
             $stmt->bindParam("points", $points);
             $stmt->execute();
@@ -173,7 +173,8 @@ class DatabaseAdaptor {
 $theDBA = new DatabaseAdaptor ();
 //$arr = $theDBA->login('User', 'Pass');
 //$arr = $theDBA->register('Jason', 'Hall', 'fondvm', 'User', 'Pass', 1);
-//$arr = $theDBA->getAssignments(666);
+//$arr = $theDBA->getAssignmentGrades(666, 'Assignment1');
+//$arr = $theDBA->createAssignment(666, 'Assignment1', 10);
 //print_r($arr);
 
 

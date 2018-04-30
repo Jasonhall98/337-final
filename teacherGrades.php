@@ -15,7 +15,6 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 </head>
 <body>
 
-<h1>not finished</h1>
 
 <div id='classes'></div>
 
