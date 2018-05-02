@@ -14,18 +14,19 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 <title>Teacher Grades</title>
 </head>
 <body>
-
+<div class = "blue"></div>
 <h3>Grades</h3>
 
 
-<button onclick="assignment();">Create assignment</button>
+
 <div id='assignmentCreate'></div>
 
 
 <br><br>
 <div id='Assignments'></div>
 
-<button onclick='finalize();' >Finalize Grades</button>
+<button class = "back_button" onclick='finalize();' >Finalize Grades</button>
+<button class = "back_button" onclick="assignment();">Create assignment</button>
 
 <script>
 
@@ -72,7 +73,7 @@ anObj.onreadystatechange = function () {
         var str = "<div>";
 
         for (var i = 0; i < array.length; i++) {
-            str += "<div onclick='window.location.href=\"teacherAssignmentGrades.php?course_id=" + array[i]['class_id'] +
+            str += "<div class = 'a_class' onclick='window.location.href=\"teacherAssignmentGrades.php?course_id=" + array[i]['class_id'] +
             					 "&assignment=" + array[i]['assignment'] + "\"' >" + array[i]['assignment'] + "</div><br>";
         }
 
