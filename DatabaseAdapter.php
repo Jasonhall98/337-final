@@ -194,7 +194,7 @@ class DatabaseAdaptor {
     	$stmt->bindParam(':class', $class_id);
     	$stmt->bindparam(':teacher', $teacher_id);
     	$stmt->execute ();
-    	$thing = $stmt.fet
+    	$thing = $stmt->fetchAll (PDO::FETCH_ASSOC );
     	$stmt = $this->DB->prepare("INSERT INTO curclasses(teacher_id, class_id, student_id) values (:teacher, :class, :student)");
     	$stmt->bindParam(':teacher', $teacher_id);
     	$stmt->bindParam(':student', $student_id);

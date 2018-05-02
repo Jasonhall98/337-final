@@ -45,7 +45,7 @@ anObj.onreadystatechange = function () {
 
 
 function register() {
-	alert("Registered!");
+	//alert("Registered!");
 	var anObj = new XMLHttpRequest();
 	anObj.open("POST", "controller.php", true);
 	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -54,7 +54,7 @@ function register() {
 			+ "&student_id=" + <?php echo $_SESSION['id'] ?>);
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
-			alert(anObj.responseText);
+			//alert(anObj.responseText);
 		}		
 
 	}
@@ -66,11 +66,15 @@ function backToMain() {
 }
 
 </script>
-<div id="title">This is a class</div>
-<div id="desc">This is a description</div>
+<h2 id="title">This is a class</h2>
+<div id="desc">This is a description</div><br>
+<div>
 Instructor: <div id = "instructor"></div>
+</div>
+<div>
 <button onclick = "register()">Register</button>
 
 <button onclick ="backToMain()">Go back</button>
+</div>
 </body>
 </html>
