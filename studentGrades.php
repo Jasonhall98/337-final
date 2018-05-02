@@ -14,9 +14,11 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 <title>Student Main</title>
 </head>
 <body>
-
+<div class = "blue"></div>
+<br>
 <div id='classes'></div>
 
+<button class = "back_button" onclick='window.location.href="student.php"'>Back</button>
 <script>
 var classes = document.getElementById('classes');
 
@@ -32,7 +34,7 @@ anObj.onreadystatechange = function () {
         var str = "<div>";
 
         for (var i = 0; i < array.length; i++) {
-            str += "<div onclick='window.location.href=\"studentClassGrades.php?class=" + array[i]["course_id"] + "\"'>" + array[i]["course_id"] + " " + array[i]["title"] + "</div><br>";
+            str += "<div class = 'a_class' onclick='window.location.href=\"studentClassGrades.php?class=" + array[i]["course_id"] + "\"'>" + array[i]["course_id"] + " " + array[i]["title"] + "</div><br>";
         }
 
         str += '</div>';

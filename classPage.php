@@ -16,6 +16,7 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 <title>Student Main</title>
 </head>
 <body>
+<div class = "blue"></div>
 <script>
 
 var title = document.getElementById('title');
