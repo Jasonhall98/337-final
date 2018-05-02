@@ -36,7 +36,7 @@ function assignment() {
 
 	str += "Assignment Name <br><input class='login_inputs' id='name' required> <br>";
 	str += "Max Points <br> <input class='login_inputs' type='number' id='points' required> <br>";
-	str += "<input class='login_inputs' type=submit value='Submit'><br><br></form>";
+	str += "<input class='back_button' type=submit value='Submit'><br><br></form>";
 	
 	assignmentCreate.innerHTML = str;
 }
