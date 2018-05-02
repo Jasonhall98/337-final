@@ -105,6 +105,14 @@ class DatabaseAdaptor {
     
     
     public function getStudentClasses($id) {
+        $stmt = $this->DB->prepare( "SELECT * FROM curClasses join courses on curClasses.class_id = courses.course_id where student_id = :id" );
+        $stmt->bindParam(':id', $id);
+        $stmt->execute ();
+        return $stmt->fetchAll ( PDO::FETCH_ASSOC );
+        
+    }
+    
+    public function getStudentTranscript($id) {
         $stmt = $this->DB->prepare( "SELECT * FROM grades join courses on grades.course_id = courses.course_id where student_id = :id" );
         $stmt->bindParam(':id', $id);
         $stmt->execute ();
@@ -128,11 +136,12 @@ class DatabaseAdaptor {
         
     }
     
-    public function updateGrade($course_id, $student_id, $value) {
-        $stmt = $this->DB->prepare("UPDATE grades SET grade = :value where course_id = :course_id and student_id = :student_id");
+    public function updateGrade($course_id, $student_id, $value, $assignment) {
+        $stmt = $this->DB->prepare("UPDATE curGrades SET points = :value where class_id = :course_id and student_id = :student_id and assignment = :assignment");
         $stmt->bindParam(":value", $value);
         $stmt->bindParam(":course_id", $course_id);
         $stmt->bindParam(":student_id", $student_id);
+        $stmt->bindParam(":assignment", $assignment);
         $stmt->execute();
     
     }
@@ -202,6 +211,68 @@ class DatabaseAdaptor {
     	$stmt->execute();
     	
     }
+    
+    public function finalizeGrades($course_id) {
+        $stmt = $this->DB->prepare("SELECT * from curGrades where class_id = :course_id order by student_id");
+        $stmt->bindParam(':course_id', $course_id);
+        $stmt->execute();
+        $arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $i = 0;        
+        while ($i < count($arr)) {
+            $curStudent = $arr[$i]['student_id'];
+            
+            $points = 0;
+            $maxPoints = 0;
+            
+            while ($i < count($arr) && $arr[$i]['student_id'] == $curStudent) {
+                $points += $arr[$i]['points'];
+                $maxPoints += $arr[$i]['maxPoints'];
+                
+                
+                $i++;
+            }
+            
+            $percentage = $points / (float) $maxPoints;
+            
+            $grade;
+            if ($percentage >= .9) {
+                $grade = 'A';
+            } elseif ($percentage >= .8) {
+                $grade = 'B';
+            } elseif ($percentage >= .7) {
+                $grade = 'C';
+            } elseif ($percentage >= .6) {
+                $grade = 'D';
+            } else {
+                $grade = 'F';
+            }
+            
+            
+            $stmt = $this->DB->prepare("INSERT INTO grades (course_id, grade, student_id) values (:course_id, :grade, :student)");
+            $stmt->bindParam(':course_id', $course_id);
+            $stmt->bindParam(':student', $curStudent);
+            $stmt->bindParam(':grade', $grade);
+            $stmt->execute();
+            
+        }
+        
+        $stmt = $this->DB->prepare("DELETE from assignments where class_id = :class_id");
+        $stmt->bindParam(':class_id', $course_id);
+        $stmt->execute();
+        
+        $stmt = $this->DB->prepare("DELETE from curClasses where class_id = :class_id");
+        $stmt->bindParam(':class_id', $course_id);
+        $stmt->execute();
+        
+        $stmt = $this->DB->prepare("DELETE from curGrades where class_id = :class_id");
+        $stmt->bindParam(':class_id', $course_id);
+        $stmt->execute();
+        
+        $stmt = $this->DB->prepare("DELETE from courses where course_id = :class_id");
+        $stmt->bindParam(':class_id', $course_id);
+        $stmt->execute();
+    }
 }
 
 $theDBA = new DatabaseAdaptor ();
@@ -209,7 +280,11 @@ $theDBA = new DatabaseAdaptor ();
 //$arr = $theDBA->register('Jason', 'Hall', 'fondvm', 'User', 'Pass', 1);
 //$arr = $theDBA->getAssignmentGrades(666, 'Assignment1');
 //$arr = $theDBA->createAssignment(666, 'Assignment1', 10);
+
 //$arr = $theDBA->getClassInfo(666);
+
+//$arr = $theDBA->finalizeGrades(666);
+
 //print_r($arr);
 
 

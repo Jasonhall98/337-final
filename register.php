@@ -1,4 +1,10 @@
-<?php session_start();?>
+<?php session_start();
+#returns to the login if the permissions dont allow for the user to enter this page
+if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 3) {
+    echo '<script> window.location.href = "main.php" </script>';
+    
+}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -24,7 +30,7 @@ UserName <br>
 <input id="user" required> <br>
 
 Password <br>
-<input id="pass" required> <br>
+<input id="pass" type="password" required> <br>
 
 <select id=permissions>
 	<option value="1">Student</option>
@@ -57,7 +63,7 @@ function register() {
 	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	anObj.send("register=1&first=" + first + "&last=" + last + "&email=" + email + "&user=" + user + "&pass=" + pass + "&permissions=" + permissions);
 
-	alert('pause');
+	//alert('pause');
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
 			var success = anObj.responseText;
