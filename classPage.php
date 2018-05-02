@@ -54,7 +54,11 @@ function register() {
 			+ "&student_id=" + <?php echo $_SESSION['id'] ?>);
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
-			//alert(anObj.responseText);
+			if (anObj.responseText === '1') {
+				window.location.href = 'registerClasses.php';
+			} else {
+				document.getElementById('write').innerHTML = 'You are already registered for this class.';
+			}
 		}		
 
 	}
@@ -76,5 +80,6 @@ Instructor: <div id = "instructor"></div>
 
 <button onclick ="backToMain()">Go back</button>
 </div>
+<div id='write'></div>
 </body>
 </html>

@@ -33,8 +33,8 @@ function assignment() {
 	var assignmentCreate = document.getElementById('assignmentCreate');
 	var str = "<form onsubmit='createAssignment(); return false;'>";
 
-	str += "Assignment Name <br><input id='name'> <br>";
-	str += "Max Points <br> <input type='number' id='points'> <br>";
+	str += "Assignment Name <br><input id='name' required> <br>";
+	str += "Max Points <br> <input type='number' id='points' required> <br>";
 	str += "<input type=submit value='Submit'><br><br></form>";
 	
 	assignmentCreate.innerHTML = str;
@@ -102,7 +102,7 @@ function finalize() {
 
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
-			window.href.location = 'teacherGrades.php';
+			window.location.href = 'teacherGrades.php';
 		}
 	}
 	

@@ -18,6 +18,7 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 
 <div id='classes'></div>
 
+<button onclick='window.location.href="teacher.php"'>Back</button>
 
 <script>
 var classes = document.getElementById('classes');

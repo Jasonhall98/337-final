@@ -200,15 +200,19 @@ class DatabaseAdaptor {
     public function registerClass($course_id, $student_id, $teacher_id) {
     	$stmt = $this->DB->prepare("SELECT * from curclasses where student_id = :student and class_id = :class and teacher_id = :teacher");
     	$stmt->bindParam(':student', $student_id);
-    	$stmt->bindParam(':class', $class_id);
+    	$stmt->bindParam(':class', $course_id);
     	$stmt->bindparam(':teacher', $teacher_id);
     	$stmt->execute ();
     	$thing = $stmt->fetchAll (PDO::FETCH_ASSOC );
-    	$stmt = $this->DB->prepare("INSERT INTO curclasses(teacher_id, class_id, student_id) values (:teacher, :class, :student)");
-    	$stmt->bindParam(':teacher', $teacher_id);
-    	$stmt->bindParam(':student', $student_id);
-    	$stmt->bindParam(':class', $course_id);
-    	$stmt->execute();
+    	if ($thing == null) {
+    	    $stmt = $this->DB->prepare("INSERT INTO curclasses (teacher_id, class_id, student_id) values (:teacher, :class, :student)");
+    	    $stmt->bindParam(':teacher', $teacher_id);
+        	$stmt->bindParam(':student', $student_id);
+            $stmt->bindParam(':class', $course_id);
+    	    $stmt->execute();
+    	    return 1;
+    	}
+    	return 0;
     	
     }
     
@@ -284,7 +288,7 @@ $theDBA = new DatabaseAdaptor ();
 //$arr = $theDBA->getClassInfo(666);
 
 //$arr = $theDBA->finalizeGrades(666);
-
+//$arr = $theDBA->registerClass(777, 7,14);
 //print_r($arr);
 
 
