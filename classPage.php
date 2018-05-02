@@ -66,7 +66,7 @@ function register() {
 
 
 function backToMain() {
-	window.location.href = 'student.php';
+	window.location.href = 'registerClasses.php';
 }
 
 </script>
@@ -76,9 +76,11 @@ function backToMain() {
 Instructor: <div id = "instructor"></div>
 </div>
 <div>
-<button onclick = "register()">Register</button>
 
-<button onclick ="backToMain()">Go back</button>
+<button class = "back_button" onclick ="backToMain()">Go back</button>
+<button class= "back_button" onclick = "register()">Register</button>
+
+
 </div>
 <div id='write'></div>
 </body>

@@ -14,12 +14,12 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 <title>Student Class Registration</title>
 </head>
 <body>
-
+<h2 class = "select_class">Select a class to register</h2>
 
 <div id="classes"></div>
-
-<button onclick='window.location.href="student.php"'>Back</button>
-
+<div class = "back_div">
+<button class = "back_button" onclick='window.location.href="student.php"'>Back</button>
+</div>
 <script>
  	var classes = document.getElementById("classes");
     
@@ -35,7 +35,7 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
             var str = "";
 
             for (var i = 0; i < array.length; i++) {
-                str += "<div onclick='window.location.href=\"classPage.php?id=" + array[i]["course_id"] + "\"'> " + array[i]["course_id"] + " " + array[i]["title"] + "</div><br>";
+                str += "<div class='a_class' onclick='window.location.href=\"classPage.php?id=" + array[i]["course_id"] + "\"'> " + array[i]["course_id"] + " " + array[i]["title"] + "</div><br>";
             }
 
 			classes.innerHTML = str;

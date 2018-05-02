@@ -12,13 +12,13 @@
 </head>
 <body>
 
-
+<div class="login_box">
 <?php
 if (!isset($_SESSION['permissions'])) {
-    echo '<div align="center"> <h3>Login</h3> <br>'; 
+    echo '<div class= "login_text" align="center"> <h3>Login</h3> <br>'; 
     echo '<form onsubmit="login(); return false;">';
-    echo '<input placeholder="Username" id="user" required> <br> <br>';
-    echo '<input placeholder="Password" id="pass" type="password" required> <br> <br>';
+    echo '<input class="login_inputs" placeholder="Username" id="user" required> <br> <br>';
+    echo '<input class="login_inputs" placeholder="Password" id="pass" type="password" required> <br> <br>';
     echo '<input type="submit" value="Login">';    
     echo '</form></div>';
 } else if ($_SESSION['permissions'] == 1) {
@@ -30,7 +30,7 @@ if (!isset($_SESSION['permissions'])) {
 };
     
 ?>
-
+</div>
 <div id="write"></div>
 
 <script>

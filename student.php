@@ -14,16 +14,16 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 <title>Student Main</title>
 </head>
 <body>
-
+<div class = "student_name">
 <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>
-
+</div>
 <div class="blue">
-<button onclick="logout();"> Logout </button>
+<button class = "logout_button" onclick="logout();"> Logout </button>
 </div>
 
-<button onclick="window.location.href= 'registerClasses.php';">Register For Classes</button>
-<button onclick="window.location.href= 'transcript.php';">Transcript</button>
-<button onclick="window.location.href= 'studentGrades.php';">Grades</button>
+<button class = "buttons" onclick="window.location.href= 'registerClasses.php';">Register For Classes</button>
+<button class = "buttons" onclick="window.location.href= 'transcript.php';">Transcript</button>
+<button class = "buttons" onclick="window.location.href= 'studentGrades.php';">Grades</button>
 
 
 <div id="classes"></div>
@@ -42,7 +42,7 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
             var str = "";
 
             for (var i = 0; i < array.length; i++) {
-                str += array[i]["course_id"] + " " + array[i]["title"] + "<br>";
+                str += array[i]["course_id"] + " " + array[i]["title"] + "<br><hr>";
             }
 
 			classes.innerHTML = str;
