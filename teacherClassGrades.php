@@ -25,6 +25,7 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 <br><br>
 <div id='Assignments'></div>
 
+<button onclick='finalize();' >Finalize Grades</button>
 
 <script>
 
@@ -89,6 +90,19 @@ function updateGrade(student_id, value) {
 
 	anObj.onreadystatechange = function () {
 		if (anObj.readyState == 4 && anObj.status == 200) {
+		}
+	}
+	
+}
+
+function finalize() {
+	anObj.open("POST", "controller.php", true);
+	anObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	anObj.send("finalizeGrades=1&course_id=" + <?php echo $_GET['class']; ?>);
+
+	anObj.onreadystatechange = function () {
+		if (anObj.readyState == 4 && anObj.status == 200) {
+			window.href.location = 'teacherGrades.php';
 		}
 	}
 	

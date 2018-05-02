@@ -18,10 +18,9 @@ if (!isset($_SESSION['permissions'])) {
     echo '<div align="center"> <h3>Login</h3> <br>'; 
     echo '<form onsubmit="login(); return false;">';
     echo '<input placeholder="Username" id="user" required> <br> <br>';
-    echo '<input placeholder="Password" id="pass" required> <br> <br>';
+    echo '<input placeholder="Password" id="pass" type="password" required> <br> <br>';
     echo '<input type="submit" value="Login">';    
     echo '</form></div>';
-    echo '<button onclick="window.location.href=\'register.php\';"> Register </button>';
 } else if ($_SESSION['permissions'] == 1) {
     echo "<script> window.location.href = 'student.php' </script>";
 } else if ($_SESSION['permissions'] == 2) {
