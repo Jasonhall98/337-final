@@ -27,16 +27,16 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 
 <button class = "back_button" onclick='finalize();' >Finalize Grades</button>
 <button class = "back_button" onclick="assignment();">Create assignment</button>
-
+<button class = "back_button" onclick ="window.location.href='teacherGrades.php'">Back</button>
 <script>
 
 function assignment() {
 	var assignmentCreate = document.getElementById('assignmentCreate');
 	var str = "<form onsubmit='createAssignment(); return false;'>";
 
-	str += "Assignment Name <br><input id='name' required> <br>";
-	str += "Max Points <br> <input type='number' id='points' required> <br>";
-	str += "<input type=submit value='Submit'><br><br></form>";
+	str += "Assignment Name <br><input class='login_inputs' id='name' required> <br>";
+	str += "Max Points <br> <input class='login_inputs' type='number' id='points' required> <br>";
+	str += "<input class='login_inputs' type=submit value='Submit'><br><br></form>";
 	
 	assignmentCreate.innerHTML = str;
 }

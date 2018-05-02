@@ -14,9 +14,9 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 <title>Teacher Main</title>
 </head>
 <body>
-
+<div class = 'student_name'>
 <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>
-
+</div>
 <div class="blue">
 <button class = "logout_button" onclick="logout();"> Logout </button>
 </div>
