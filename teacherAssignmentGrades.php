@@ -15,10 +15,18 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 </head>
 <body>
 
+<div class="blue">
+
+</div>
+
 <h3>Grades</h3>
 
+<br>
 
 <div id='grades'></div>
+
+<button class = "back_button" onclick ="window.location.href='teacherGrades.php'">Back</button>
+
 
 <script>
 var grades = document.getElementById('grades');
@@ -37,7 +45,11 @@ anObj.onreadystatechange = function () {
         for (var i = 0; i < array.length; i++) {
             var value = array[i]["points"];
             if (value === null) value = 0;
+<<<<<<< HEAD
             str += "<div>" + array[i]["first_name"] + " " + array[i]["last_name"] + " <input class = 'login_inputs' type='number' onchange='updateGrade(" + array[i]['student_id'] +
+=======
+            str += "<div>" + array[i]["first_name"] + " " + array[i]["last_name"] + " <input type='number' class='login_inputs' onchange='updateGrade(" + array[i]['student_id'] +
+>>>>>>> refs/remotes/origin/dev
             						", this.value)' placeholder='" + value + "'> / " + array[i]['maxPoints'] + "</div><br>";
         }
 
