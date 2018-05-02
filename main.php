@@ -19,7 +19,7 @@ if (!isset($_SESSION['permissions'])) {
     echo '<form onsubmit="login(); return false;">';
     echo '<input class="login_inputs" placeholder="Username" id="user" required> <br> <br>';
     echo '<input class="login_inputs" placeholder="Password" id="pass" type="password" required> <br> <br>';
-    echo '<input type="submit" value="Login">';    
+    echo '<input class="back_button" type="submit" value="Login">';    
     echo '</form></div>';
 } else if ($_SESSION['permissions'] == 1) {
     echo "<script> window.location.href = 'student.php' </script>";
