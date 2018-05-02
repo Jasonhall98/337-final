@@ -14,9 +14,9 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 1) {
 <title>Student Main</title>
 </head>
 <body>
-
+<div class = "blue"></div>
 <div id='grades'></div>
-
+<button class = "back_button" onclick='window.location.href="studentGrades.php"'>Back</button>
 
 <script>
 var grades = document.getElementById('grades');
