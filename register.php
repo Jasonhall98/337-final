@@ -41,7 +41,8 @@ Password <br>
 
 </select>
 
-<input type="submit" value="Register">
+<br>
+<input class='back_button' type="submit" value="Register">
 
 </form>
 
