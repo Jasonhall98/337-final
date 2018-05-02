@@ -18,12 +18,12 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 3) {
 <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>
 
 <div class="blue">
-<button onclick="logout();"> Logout </button>
+<button class = "logout_button" onclick="logout();"> Logout </button>
 </div>
 
-<button onclick="window.location.href='register.php';"> Registration </button>
+<button class = "buttons" onclick="window.location.href='register.php';"> Registration </button>
 
-<button onclick="window.location.href='createClass.php';">Create Class</button>
+<button class = "buttons" onclick="window.location.href='createClass.php';">Create Class</button>
 
 
 <div id="classes"></div>

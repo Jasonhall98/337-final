@@ -18,12 +18,12 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 2) {
 <?php echo $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>
 
 <div class="blue">
-<button onclick="logout();"> Logout </button>
+<button class = "logout_button" onclick="logout();"> Logout </button>
 </div>
 
-<button onclick='window.location.href="teacherGrades.php"'>Grades</button>
+<button class = "buttons" onclick='window.location.href="teacherGrades.php"'>Grades</button>
 
-<div id='classes'></div>
+<div class = 'classes' id='classes'></div>
 
 
 <script>
@@ -55,7 +55,7 @@ anObj.onreadystatechange = function () {
         var str = "";
 
         for (var i = 0; i < array.length; i++) {
-            str += array[i]["course_id"] + " " + array[i]["title"] + "<br>";
+            str += array[i]["course_id"] + " " + array[i]["title"] + "<br><hr>";
         }
 
 		classes.innerHTML = str;

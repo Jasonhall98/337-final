@@ -11,16 +11,19 @@ include 'DatabaseAdapter.php';
 </head>
 <body>
 
+<br>
+<div align='center'>
+
 <form onsubmit="createClass();return false;">
 
 Course Id <br>
-<input id="id" required> <br>
+<input class='login_inputs' id="id" required> <br>
 
 Title <br>
-<input id="title" required> <br>
+<input class='login_inputs' id="title" required> <br>
 
 Course Description <br>
-<input id="description"> <br>
+<input class='login_inputs' id="description"> <br>
 
 Teacher <br>
 <select id='teacher'>
@@ -42,6 +45,11 @@ Teacher <br>
 </form>
 
 <div id="tochange"></div>
+
+</div>
+
+<button class = "back_button" onclick ="window.location.href='admin.php'">Back</button>
+
 
 <script>
 

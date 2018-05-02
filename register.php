@@ -15,22 +15,24 @@ if (!isset($_SESSION['permissions']) || $_SESSION['permissions'] != 3) {
 </head>
 <body>
 
+<br>
+<div align='center'>
 <form onsubmit="register();return false;">
 
 First Name <br>
-<input id="first" required> <br>
+<input class='login_inputs' id="first" required> <br>
 
 Last Name <br>
-<input id="last" required> <br>
+<input class='login_inputs' id="last" required> <br>
 
 Email <br>
-<input id="email"> <br>
+<input class='login_inputs' id="email"> <br>
 
 UserName <br>
-<input id="user" required> <br>
+<input class='login_inputs' id="user" required> <br>
 
 Password <br>
-<input id="pass" type="password" required> <br>
+<input class='login_inputs' id="pass" type="password" required> <br>
 
 <select id=permissions>
 	<option value="1">Student</option>
@@ -44,6 +46,10 @@ Password <br>
 </form>
 
 <div id="tochange"></div>
+</div>
+
+<button class = "back_button" onclick ="window.location.href='admin.php'">Back</button>
+
 
 <script>
 
